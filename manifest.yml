@@ -1,0 +1,57 @@
+app:
+  id: ari:cloud:ecosystem::app/86d30698-453e-4019-8a58-000de0354880
+  runtime:
+    name: nodejs22.x
+    memoryMB: 256
+    architecture: arm64
+  licensing:
+    enabled: true
+
+modules:
+  macro:
+    - key: repobridge-embed-macro
+      resource: main
+      render: native              # ← tells Forge this is UI Kit 2, so file is OK
+      resolver:
+        function: resolver
+      title: RepoBridge
+      description: Embed documents from your repositories via RepoBridge
+      viewportSize: large
+      config:
+        resource: macro-config    # ← this one IS Custom UI (directory)
+        viewportSize: large
+        title: Configure RepoBridge macro
+
+  function:
+    - key: resolver
+      handler: index.handler
+
+resources:
+  - key: main
+    path: src/frontend/index.jsx        # UI Kit 2 view file
+  - key: macro-config
+    path: static/repobridge-ui/build      # Custom UI config bundle (CRA)
+
+permissions:
+  scopes:
+    - storage:app
+  external:
+    fetch:
+      backend:
+        - remote: github-api
+        - remote: github-raw
+        - remote: gitlab-api
+
+remotes:
+  - key: github-api
+    baseUrl: "https://api.github.com"
+    operations:
+      - fetch
+  - key: github-raw
+    baseUrl: "https://raw.githubusercontent.com"
+    operations:
+      - fetch
+  - key: gitlab-api
+    baseUrl: "https://gitlab.com"
+    operations:
+      - fetch

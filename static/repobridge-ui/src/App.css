@@ -1,0 +1,273 @@
+/* === Fonts ===================================================== */
+@font-face {
+  font-family: 'font-cbr';
+  src: url('./fonts/cd-R.woff2') format('woff2'),
+       url('./fonts/cd-R.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'font-ctb';
+  src: url('./fonts/ct-B.woff2') format('woff2'),
+       url('./fonts/ct-B.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Default body font inside the iframe */
+body {
+  margin: 0;
+  font-family: 'font-cbr', sans-serif;
+}
+
+/* Utility font classes */
+.font-cbr {
+  font-family: 'font-cbr', sans-serif;
+}
+
+.font-ctb {
+  font-family: 'font-ctb', sans-serif;
+}
+
+/* === Loading screen ============================================ */
+
+.loading-root {
+  box-sizing: border-box;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'font-cbr', sans-serif;
+  color: #ffffff;
+  text-align: center;
+
+  /* Animated gradient background */
+  background: linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 29, 1) 50%,
+    rgba(252, 176, 69, 1) 100%
+  );
+  background-size: 300% 300%;
+  animation: rb-gradient 8s ease-in-out infinite;
+}
+
+@keyframes rb-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* === Main form layout ========================================== */
+
+.app-root {
+  box-sizing: border-box;
+  height: 100vh;              /* fill iframe viewport */
+  width: 100%;
+  display: flex;
+  align-items: center;        /* vertical center */
+  justify-content: center;    /* horizontal center */
+  background: #16c27e;        /* green band behind card */
+}
+
+/* Big white rounded card */
+.rb-card {
+  max-width: 960px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 32px;
+  box-shadow: 0 24px 60px rgba(9, 30, 66, 0.35);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Two-column layout inside card */
+.rb-card-inner {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  padding: 40px 40px 28px 40px; /* more top padding so title breathes */
+}
+
+
+/* Left illustration / copy */
+.rb-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.rb-hero-title {
+  font-size: 32px;
+  line-height: 1.1;
+  margin: 0 0 12px;          /* space between title and subtitle */
+}
+
+.rb-hero-subtitle {
+  font-size: 14px;
+  color: #6b778c;
+  margin: 0 0 12px;          /* same gap to the form block (via row-gap) */
+}
+
+
+
+.rb-hero-illustration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+}
+
+.rb-hero-illustration img {
+  max-width: 220px;
+  height: auto;
+}
+
+/* Right form side */
+.rb-form {
+  background: #f8fafc;
+  border-radius: 20px;
+  padding: 16px 24px 20px;   /* slightly less top/bottom padding, more balanced */
+  border: 1px solid #e1e5ee;
+  font-family: 'font-cbr', sans-serif;
+}
+
+.rb-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+/* Labels use font-ctb via class in JSX */
+.rb-label {
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: #7a869a;
+}
+
+/* Underlined, minimal inputs */
+.rb-input {
+  width: 100%;
+  padding: 4px 0 6px;
+  border: none;
+  border-bottom: 1px solid #dfe1e6;
+  background: transparent;
+  font-size: 13px;
+  outline: none;
+  font-family: 'font-cbr', sans-serif;  /* form text */
+}
+
+.rb-input::placeholder {
+  color: #b3bac5;
+  font-family: 'font-cbr', sans-serif;  /* placeholder text */
+}
+
+/* Actions */
+.rb-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+/* Primary action */
+.rb-button {
+  border-radius: 999px;
+  border: none;
+  padding: 8px 18px;
+  font-size: 13px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #00a36b;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.rb-button[disabled] {
+  cursor: default;
+  background: #a5adba;
+}
+
+/* Status text */
+.rb-error {
+  color: #de350b;
+  font-size: 12px;
+  margin: 0 0 8px;
+}
+
+.rb-info {
+  color: #36b37e;
+  font-size: 12px;
+  margin: 0 0 8px;
+}
+
+/* Simple responsiveness */
+@media (max-width: 900px) {
+  .rb-card-inner {
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+  }
+
+  .rb-card {
+    border-radius: 24px;
+    position: relative;
+  }
+}
+
+
+.rb-footer {
+  border-top: 1px solid #edf0f5;
+  margin: 0 40px 20px;
+  padding-top: 10px;
+  font-size: 11px;
+  color: #7a869a;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.rb-footer a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.rb-footer-logo {
+    width: 16px;
+    height: 16px;
+    position: absolute
+    ;
+}
+
+
+/* Close button in the top-right */
+.rb-close-button {
+  position: absolute;
+  top: 18px;   /* a bit below the top edge so it looks intentional */
+  right: 22px; /* aligns with your 40px inner padding visually */
+  border: none;
+  background: rgba(9, 30, 66, 0.04);
+  border-radius: 999px;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  color: #6b778c;
+  padding: 4px 8px;
+}
+
+.rb-close-button:hover {
+  background: rgba(9, 30, 66, 0.08);
+  color: #172b4d;
+  transform: translateY(-0.5px);
+}
