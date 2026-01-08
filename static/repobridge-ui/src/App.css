@@ -19,6 +19,8 @@
 body {
   margin: 0;
   font-family: 'font-cbr', sans-serif;
+  /* Ensure the iframe/page background is transparent to the host */
+  background: transparent !important;
 }
 
 /* Utility font classes */
@@ -42,16 +44,9 @@ body {
   font-family: 'font-cbr', sans-serif;
   color: #ffffff;
   text-align: center;
-
-  /* Animated gradient background */
-  background: linear-gradient(
-    90deg,
-    rgba(131, 58, 180, 1) 0%,
-    rgba(253, 29, 29, 1) 50%,
-    rgba(252, 176, 69, 1) 100%
-  );
-  background-size: 300% 300%;
-  animation: rb-gradient 8s ease-in-out infinite;
+  /* Make loading background invisible */
+  background: transparent !important;
+  animation: none !important;
 }
 
 @keyframes rb-gradient {
@@ -75,7 +70,8 @@ body {
   display: flex;
   align-items: center;        /* vertical center */
   justify-content: center;    /* horizontal center */
-  background: #16c27e;        /* green band behind card */
+  /* Make container background transparent so host page shows through. */
+  background: transparent;
 }
 
 /* Big white rounded card */
@@ -176,6 +172,7 @@ body {
 .rb-actions {
   display: flex;
   justify-content: flex-end;
+  gap: 8px;
   margin-top: 12px;
 }
 
@@ -197,6 +194,24 @@ body {
 .rb-button[disabled] {
   cursor: default;
   background: #a5adba;
+}
+
+/* Secondary action */
+.rb-button-secondary {
+  border-radius: 999px;
+  border: 1px solid #dfe1e6;
+  padding: 8px 18px;
+  font-size: 13px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f4f5f7;
+  color: #172b4d;
+}
+
+.rb-button-secondary:hover {
+  background: #ebecf0;
 }
 
 /* Status text */
@@ -254,8 +269,8 @@ body {
 /* Close button in the top-right */
 .rb-close-button {
   position: absolute;
-  top: 18px;   /* a bit below the top edge so it looks intentional */
-  right: 22px; /* aligns with your 40px inner padding visually */
+  top: 28px;    /* nudge down to avoid clipping near the curve */
+  right: 28px;  /* even inset to visually balance the corner */
   border: none;
   background: rgba(9, 30, 66, 0.04);
   border-radius: 999px;

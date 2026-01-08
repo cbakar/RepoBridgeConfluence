@@ -262,6 +262,14 @@ function App() {
 
             <div className="rb-actions">
               <button
+                className="rb-button-secondary font-ctb"
+                type="button"
+                aria-label="Close configuration"
+                onClick={() => view.close()}
+              >
+                Close
+              </button>
+              <button
                 className="rb-button font-ctb"
                 onClick={save}
                 disabled={saving || !owner || !repo || !path}

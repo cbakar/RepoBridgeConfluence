@@ -4,6 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "build": "npm run build --prefix static/repobridge-ui",
+    "build:ui": "npm run build --prefix static/repobridge-ui"
+  },
   "devDependencies": {
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0"
