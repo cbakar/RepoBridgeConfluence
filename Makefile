@@ -16,7 +16,8 @@
 # Variables
 TAG ?= dev
 # Map TAG to Forge environment name
-ENV ?= $(if $(filter $(TAG),prod production),production,development)
+# dev|development -> development, stg|staging -> staging, prod|production -> production
+ENV ?= $(if $(filter $(TAG),prod production),production,$(if $(filter $(TAG),stg staging),staging,development))
 SITE ?= cmbkr.atlassian.net
 PRODUCT ?= confluence
 UPGRADE ?= 0
@@ -35,9 +36,9 @@ endif
 .PHONY: help
 help:
 	@echo "RepoBridge Makefile targets:"
-	@echo "  make deploy TAG=dev|prod           # Build UI, lint, deploy"
-	@echo "  make install TAG=dev|prod SITE=... # Install app (or upgrade with UPGRADE=1)"
-	@echo "  make release TAG=dev|prod          # Build + deploy + install"
+	@echo "  make deploy TAG=dev|stg|prod       # Build UI, lint, deploy"
+	@echo "  make install TAG=dev|stg|prod SITE=... # Install app (or upgrade with UPGRADE=1)"
+	@echo "  make release TAG=dev|stg|prod      # Build + deploy + install"
 	@echo "  make build-ui                      # Build Custom UI bundle"
 	@echo "  make deps                          # Install root + UI deps"
 	@echo "  make tunnel                        # Start forge tunnel (dev)"
